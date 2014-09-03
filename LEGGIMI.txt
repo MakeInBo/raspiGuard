@@ -1,0 +1,19 @@
+da /home/pi/raspiguard/server lanciare node app.js
+
+dal browser lanciare 
+
+http://localhost:3000/api/dataservice/ZonesSummary
+http://localhost:3000/api/dataservice/Zones
+http://localhost:3000/api/dataservice/ZoneById/1
+
+per scrivere il database devo ancora lavorare su accessDBlite.js
+
+
+per testare l'applicazione AngularJS
+da /home/pi/raspiguard/server lanciare index.html
+
+
+sudo npm install -g node-inspector
+Start
+
+$ node-debug app.js

@@ -1,0 +1,93 @@
+﻿﻿<div class="devices view indent">
+    <div class="container">
+        <div class="row">       
+            <div class="span10">
+                <div class="navbar">
+                    <div class="navbar-inner toolbar">
+                        <ul class="nav  navbar-nav">
+                          <li data-ng-class="{active: !listViewEnabled}" class="toolbaritem"><a data-ng-click="changeView(ViewEnum.Card)"><i class="icon-th-large"></i> Card View</a></li>
+                          <li data-ng-class="{active: listViewEnabled}" class="toolbaritem"><a data-ng-click="changeView(ViewEnum.List)"><i class="icon-align-justify"></i> List View</a></li>
+                          <li class="toolbaritem"><a data-ng-click="navigate('/deviceedit/0')"><i class="icon-plus"></i> Add Device</a></li>
+                        </ul>
+                        <form class="navbar-form pull-right">
+                             <span class="navbarText">Devices - Description Filter:</span>&nbsp;&nbsp;<input type="text" data-ng-model="searchText" class="novalidate" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+            <div class="row cardContainer show-hide-animation" data-ng-hide="listViewEnabled">     
+                   <div class="span4 card card-animation" 
+                        data-ng-repeat="device in filteredDevices">
+                
+                       
+                        <div class="show-hide-animation" data-ng-show="device.device_id > 6  && device.eventCount===0"> 
+                            <button class="btn close cardClose" title="Delete Device" data-ng-click="deleteDevice(device.device_id)">&times;</button>
+                        </div>
+                        <div class="show-hide-animation" data-ng-show="device.device_id > 6"> 
+                            <div class="cardHeader"><a href="#/deviceedit/{{device.device_id}}" class="white">{{device.device_id + ' : ' + device.description}} <i class="icon-edit icon-white editIcon"></i></a></div>
+                        </div>
+                        <div class="show-hide-animation" data-ng-hide="device.device_id > 6"> 
+                            <div class="cardHeader white">{{device.device_id + ' : ' + device.description}} </div>
+                        </div>
+           
+                        <div class="cardBody">
+                            <div class="clearfix">
+                                <div class="pull-left cardBodyRight">
+                                   <div>Zone {{device.zone_id}}  : Code {{device.device_code}}</div>
+                                   <div data-ng-show="!device.enabled">Not enabled</div>
+                                    <div data-ng-show="device.eventCount"><a href="#/events/{{device.device_id}}" class="btn-link">{{ device.eventCount }} Events</a></div>
+                                   </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="row gridContainer devicesTable show-hide-animation" data-ng-show="listViewEnabled">
+                <div class="span10">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th data-ng-click="setOrder(mySortFunction)">Id</th>
+                                <th data-ng-click="setOrder('zone_id')">Zone Id</th>
+                                <th data-ng-click="setOrder('description')">Description</th>
+                                <th data-ng-click="setOrder('device_code')">Code</th>
+                                <th data-ng-click="setOrder('action')">Action</th>
+                                <th data-ng-click="setOrder('eventCount')">Events</th>
+                             <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="device in filteredDevices | orderBy:orderby:reverse" class="repeat-animation">
+                                <td><a href="#/deviceedit/{{device.device_id}}">{{device.device_id}}</a></td>
+                                <td>{{device.zone_id}}</td>
+                                <td>{{device.description}}</td>
+                                <td>{{device.device_code}}</td>
+                                <td>{{device.action}}</td>
+                                <td><a href="#/events/{{device.device_id}}" class="btn-link">{{ device.eventCount }} Events</a></td>
+                                <td><button class="btn btn-danger" data-ng-show="device.device_id > 6  && device.eventCount===0"data-ng-click="deleteDevice(device.id)">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row show-hide-animation" data-ng-show="devices.length == 0">
+                <div class="span12">
+                    <h4>No devices found</h4>
+                </div>
+            </div>
+            <div class="row show-hide-animation" data-ng-show="devices.length > 0">
+                <div class="span12">
+                    <div data-pagination="" data-on-select-page="pageChanged(page)" data-total-items="totalRecords" data-page="currentPage" 
+                         data-boundary-links="true" class="pagination-small"></div>
+
+                    <h5>Showing {{ filteredCount }} of {{ totalRecords}} total devices</h5>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>

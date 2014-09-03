@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>raspiGuard</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Content/styles.css" rel="stylesheet" /> 
+    <link href="Content/animations.css" rel="stylesheet" />
+</head>
+<body data-ng-cloak="">
+    <div class="navbar navbar-fixed-top" data-ng-controller="NavbarController">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="navbar-brand" href="#/"><img src="Content/images/makeinbo.gif" alt="logo"> {{ appTitle }}</a>
+                <ul class="nav nav-pills navBarPadding">
+                    <li data-ng-class="{'active':highlight('/zones')}"><a href="#/zones">Zones</a></li>
+                    <li data-ng-class="{'active':highlight('/devices')}"><a href="#/devices">Devices</a></li>
+                    <li data-ng-class="{'active':highlight('/events')}"><a href="#/events">Events</a></li>
+                    <li data-ng-class="{'active':highlight('/about')}"><a href="#/about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-animation-container">
+        <div data-ng-view="" id="ng-view" class="slide-animation"></div>
+    </div>
+
+    <div id="footer">
+        <div class="navbar navbar-fixed-bottom">
+            <div class="navbar-inner footer">
+                <div class="container">
+                    <footer>
+                        <div class="row">
+                            <div class="span12">
+                                Created by <a href="http://www.makeinbo.it" target="_blank">MakeInBo</a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-wc-overlay="" data-wc-overlay-delay="300">
+        <br /><img src="/Content/images/spinner.gif" />&nbsp;&nbsp;Loading
+    </div>
+
+    <!-- 3rd party libraries -->
+    <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/angular-route.js"></script>
+    <script src="/Scripts/angular-animate.js"></script>
+    <script src="/Scripts/angular-ui-bootstrap-tpls.js"></script>
+    <script src="/Scripts/tweenMax.min.js"></script>
+
+    <!--   <script src="/Scripts/q.min.js"></script>    -->
+
+    <!-- Load custom scripts via RequireJS -->
+    <script src="/Scripts/require.js" data-main="/Scripts/main"></script>
+
+</body>
+</html>

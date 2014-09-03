@@ -1,0 +1,74 @@
+﻿<div class="view">
+    <div class="container">
+        <header>
+            <h3>{{title}} Device {{ device.device_id }}</h3>
+        </header>
+        <form name="editForm" novalidate>
+            <div>
+                <div class="row">
+                    <div class="span12">
+                        <h4>{{ device.device_id + ' : ' + device.description }}</h4>
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Description     : <input type="text" name="description" data-ng-model="device.description" required />
+                        <span class="errorMessage" ng-show="editForm.description.$dirty && editForm.description.$invalid">
+                            Description is required
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Code        : <input type="text" name="device_code" data-ng-model="device.device_code" required />
+                       <span class="errorMessage" ng-show="editForm.device_code.$dirty && editForm.device_code.$invalid">
+                            Device code is required
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Position        : <input type="text" data-ng-model="device.position" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Action          : <input type="text" data-ng-model="device.action" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Device parent     : <input type="number" data-ng-model="device.device_parent"  />
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="span2">
+                        Enabled         : <input type="checkbox" data-ng-model="device.enabled" data-ng-true-value="1" ng-false-value="0"> <br/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Zone     : <input type="number" data-ng-model="device.zone_id" />
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="span12">
+                        <button type="submit" class="btn btn-primary" data-ng-click="saveDevice()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-danger" data-ng-if="device.id > 6" data-ng-click="deleteDevice()">Delete</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="span10 label label-success show-hide-animation" data-ng-show="updateStatus">
+                        <i class="icon-thumbs-up icon-white"></i>&nbsp;&nbsp;Device updated!
+                    </div>
+                    <div class="span10 label label-important show-hide-animation" data-ng-show="errorMessage">
+                        <i class="icon-thumbs-down icon-white"></i>&nbsp;&nbsp;Error: {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿<div class="view">
+    <div class="container">
+        <header>
+            <h3>{{title}} Zone {{ zone.zone_id }}</h3>
+        </header>
+        <form name="editForm" novalidate>
+            <div>
+                <div class="row">
+                    <div class="span12">
+                        <h4>{{ zone.zone_id + ' : ' + zone.description }}</h4>
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Description     : <input type="text" name="description" data-ng-model="zone.description" required />
+                        <span class="errorMessage" ng-show="editForm.description.$dirty && editForm.description.$invalid">
+                            Description is required
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Position        : <input type="text" data-ng-model="zone.position" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Action          : <input type="text" data-ng-model="zone.action" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Zone parent     : <input type="number" data-ng-model="zone.zone_parent"  />
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="span2">
+                        Enabled         : <input type="checkbox" data-ng-model="zone.enabled" data-ng-true-value="1" ng-false-value="0"> <br/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        Zone status     : <input type="number" data-ng-model="zone.status" />
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="span12">
+                        <button type="submit" class="btn btn-primary" data-ng-click="saveZone()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-danger" data-ng-if="zone.id > 1" data-ng-click="deleteZone()">Delete</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="span10 label label-success show-hide-animation" data-ng-show="updateStatus">
+                        <i class="icon-thumbs-up icon-white"></i>&nbsp;&nbsp;Zone updated!
+                    </div>
+                    <div class="span10 label label-important show-hide-animation" data-ng-show="errorMessage">
+                        <i class="icon-thumbs-down icon-white"></i>&nbsp;&nbsp;Error: {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

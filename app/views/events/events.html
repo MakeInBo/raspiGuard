@@ -1,0 +1,81 @@
+﻿﻿<div class="events view indent">
+    <div class="container">
+        <div class="row">       
+            <div class="span10">
+                <div class="navbar">
+                    <div class="navbar-inner toolbar">
+                        <ul class="nav  navbar-nav">
+                          <li data-ng-class="{active: !listViewEnabled}" class="toolbaritem"><a data-ng-click="changeView(ViewEnum.Card)"><i class="icon-th-large"></i> Card View</a></li>
+                          <li data-ng-class="{active: listViewEnabled}" class="toolbaritem"><a data-ng-click="changeView(ViewEnum.List)"><i class="icon-align-justify"></i> List View</a></li>
+                        </ul>
+                        <form class="navbar-form pull-right">
+                             <span class="navbarText">Events - Description Filter:</span>&nbsp;&nbsp;<input type="text" data-ng-model="searchText" class="novalidate" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+            <div class="row cardContainer show-hide-animation" data-ng-hide="listViewEnabled">     
+                   <div class="span4 card card-animation" 
+                        data-ng-repeat="event in filteredEvents">
+                
+                        <div class="cardHeader white">{{event.id + ' : ' + event.description}} </div>
+                       
+                        <div class="cardBody">
+                            <div class="clearfix">
+                                <div class="pull-left cardBodyRight">
+                                   <div>Time {{event.event_time}}</div>
+                                   <div>Device {{event.device_id}}  : Param {{event.device_param}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="row gridContainer eventsTable show-hide-animation" data-ng-show="listViewEnabled">
+                <div class="span10">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th data-ng-click="setOrder(mySortFunction)">Id</th>
+                                <th data-ng-click="setOrder('event_time')">Event Time</th>
+                                <th data-ng-click="setOrder('device_id')">Device Id</th>
+                                <th data-ng-click="setOrder('device_param')">Dev_Param</th>
+                                <th data-ng-click="setOrder('zone_alarm')">Code</th>
+                                <th data-ng-click="setOrder('processed')">Processed</th>
+                             <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="event in filteredEvents | orderBy:orderby:reverse" class="repeat-animation">
+                                <td>{{event.id}}</td>
+                                <td>{{event.event_time}}</td>
+                                <td>{{event.device_id}}</td>
+                                <td>{{event.device_param}}</td>
+                                <td>{{event.zone_alarm}}</td>
+                                <td>{{event.processed}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row show-hide-animation" data-ng-show="events.length == 0">
+                <div class="span12">
+                    <h4>No events found</h4>
+                </div>
+            </div>
+            <div class="row show-hide-animation" data-ng-show="events.length > 0">
+                <div class="span12">
+                    <div data-pagination="" data-on-select-page="pageChanged(page)" data-total-items="totalRecords" data-page="currentPage" 
+                         data-boundary-links="true" class="pagination-small"></div>
+
+                    <h5>Showing {{ filteredCount }} of {{ totalRecords}} total events</h5>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
